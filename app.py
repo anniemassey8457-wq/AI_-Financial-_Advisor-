@@ -22,11 +22,18 @@ if api_key:
         debt = st.number_input("Total Debt (₹)", min_value=0)
 
         if st.button("Get Financial Advice"):
-            prompt = f"""Act as a financial advisor. 
-            Income: {income}, Expenses: {expenses}, Savings: {savings}, Debt: {debt}
-            Give 3 budget tips, 2 saving tips, and 1 debt repayment strategy in simple points."""
+    with st.spinner("Generating your financial advice..."):
+        prompt = f"""Act as a financial advisor.
+        Income: {income}, Expenses: {expenses}, Savings: {savings}, Debt: {debt}
+        Give 3 budget tips, 2 saving tips, and 1 debt repayment strategy in simple points."""
+        try:
             response = model.generate_content(prompt)
+            st.success("Financial advice generated successfully!")
             st.write(response.text)
+        except Exception as e:
+            st.error("Sorry, we could not generate financial advice.")
+            st.write(e)
+    
 
     with tab2:
         st.header("Goal-Based Financial Planning")

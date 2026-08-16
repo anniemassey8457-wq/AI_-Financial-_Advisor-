@@ -49,3 +49,4 @@ if api_key:
             st.write(response.text)
 else:
     st.warning("Please enter your Gemini API Key in the sidebar to continue")
+    
